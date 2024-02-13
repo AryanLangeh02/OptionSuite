@@ -163,6 +163,13 @@ class StrangleStrat(strategy.Strategy):
 
     # Must check that both a CALL and PUT were found which meet criteria and are in the same expiration.
     if optimalPutOpt and optimalCallOpt and optimalPutOpt.expirationDateTime == optimalCallOpt.expirationDateTime:
+      # Before creating the signal event, log the details of the optimal call and put options
+      logging.info(f"Generating trade signal with the following options: "
+                    f"CALL - Symbol: {optimalCallOpt.optionSymbol}, Strike: {optimalCallOpt.strikePrice}, "
+                    f"Expiration: {optimalCallOpt.expirationDateTime.strftime('%Y-%m-%d')}; "
+                    f"PUT - Symbol: {optimalPutOpt.optionSymbol}, Strike: {optimalPutOpt.strikePrice}, "
+                    f"Expiration: {optimalPutOpt.expirationDateTime.strftime('%Y-%m-%d')}")
+            
       strangleObj = strangle.Strangle(self.orderQuantity, optimalCallOpt, optimalPutOpt, self.buyOrSell)
 
       # There is a case in the input data where the delta values are incorrect, and this results the strike price

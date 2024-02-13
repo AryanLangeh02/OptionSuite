@@ -28,7 +28,8 @@ class BackTestSession(object):
 
     # Create CsvData class object.
     dataProvider = 'iVolatility'
-    filename = '/Users/msantoro/PycharmProjects/Backtester/marketData/iVolatility/SPX/combinedCSV.csv'
+    #filename = '/Users/aryanlangeh/Desktop/evolutionary/optionsuite/OptionSuite/marketData/iVolatility/SPX/SPX_2011_2017/RawIV_5day_sample_updated.csv'
+    filename = '/Users/aryanlangeh/Desktop/evolutionary/optionsuite/OptionSuite/marketData/spx_2023_2.csv'
     self.dataHandler = csvData.CsvData(csvPath=filename, dataProvider=dataProvider, eventQueue=self.eventQueue)
 
     # Parameters for strangle strategy -- TODO: move params to file.
@@ -44,9 +45,9 @@ class BackTestSession(object):
     optimalDTE = 45
     minimumDTE = 35
     maxBidAsk = 15 # A general rule of thumb is to take 0.001*underlyingPrice.  Set to 15 to ignore field.
-    startingCapital = decimal.Decimal(200000)
+    startingCapital = decimal.Decimal(500000)
     self.maxCapitalToUse = 0.5  # Up to 50% of net liq can be used in trades.
-    maxCapitalToUsePerTrade = 0.10  # 10% max capital to use per trade / strategy.
+    maxCapitalToUsePerTrade = 0.20  # 10% max capital to use per trade / strategy.
     # Set up strategy (strangle strategy) and risk management preference.
     riskManagement = strangleRiskManagement.StrangleRiskManagement(
       strangleRiskManagement.StrangleManagementStrategyTypes.CLOSE_AT_50_PERCENT)  # strangleRiskManagement.StrangleManagementStrategyTypes.HOLD_TO_EXPIRATION)
@@ -141,7 +142,7 @@ def run(session):
 if __name__ == "__main__":
 
   # Set up basename for output files.
-  baseName = 'positions_strangle_01_15_21'
+  baseName = 'positions_strangle_new'
 
   # Set up logging for the session.
   logging.basicConfig(filename=baseName+'.log', level=logging.DEBUG)

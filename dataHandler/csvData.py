@@ -70,6 +70,7 @@ class CsvData(dataHandler.DataHandler):
     if 'number_columns' not in dataConfig[self.__dataProvider]:
       raise ValueError('number_columns not provided in dataProviders.json file')
     if not numberCsvColumns == dataConfig[self.__dataProvider]['number_columns']:
+      print("Number of columns read from CSV: ", numberCsvColumns)
       raise ValueError('Number of columns read from CSV did not match the number of columns in dataProviders.json')
     return dataConfig
 
@@ -151,7 +152,9 @@ class CsvData(dataHandler.DataHandler):
     # Instead of manually specifying the fields below, we could read them from the Option class.
     optionFieldDict = {'underlyingTicker': None, 'strikePrice': None, 'delta': None, 'expirationDateTime': None,
                        'underlyingPrice': None, 'optionSymbol': None, 'bidPrice': None, 'askPrice': None,
-                       'tradePrice': None, 'openInterest': None, 'volume': None, 'dateTime': None, 'theta': None,
+                       'tradePrice': None, 
+                      #  'openInterest': None, 
+                       'volume': None, 'dateTime': None, 'theta': None,
                        'gamma': None, 'rho': None, 'vega': None, 'impliedVol': None, 'exchangeCode': None,
                        'exercisePrice': None, 'assignPrice': None, 'openCost': None, 'closeCost': None,
                       }
@@ -189,7 +192,7 @@ class CsvData(dataHandler.DataHandler):
                   'bidPrice': decimal.Decimal(optionFieldDict['bidPrice']),
                   'askPrice': decimal.Decimal(optionFieldDict['askPrice']),
                   'tradePrice': decimal.Decimal(optionFieldDict['tradePrice']),
-                  'openInterest': int(optionFieldDict['openInterest']), 'volume': int(optionFieldDict['volume']),
+                  #'openInterest': int(optionFieldDict['openInterest']), 'volume': int(optionFieldDict['volume']),
                   'dateTime': datetime.datetime.strptime(optionFieldDict['dateTime'],
                                                          dataProviderConfig['date_time_format']),
                   'tradeDateTime': datetime.datetime.strptime(optionFieldDict['dateTime'],
